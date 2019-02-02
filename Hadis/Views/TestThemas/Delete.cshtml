@@ -1,0 +1,20 @@
+﻿@model Hadis.Models.DBModels.TestThema
+
+@{
+    ViewBag.Title = "Удалить";
+}
+
+<h2>Удалить обновленную версию "@Model.Thema"</h2>
+
+<h3>Вы уверены?</h3>
+<div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Назад", "Index")
+        </div>
+    }
+</div>

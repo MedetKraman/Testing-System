@@ -1,0 +1,100 @@
+﻿@using Hadis.Models.DBModels
+@model ClientCallBack
+
+@{
+    ViewBag.Title = "Ваш вопрос";
+}
+
+<h2 class="text-center">Вопрос "@Model.Thema"</h2>
+
+<div>
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Thema)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Thema)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsThemaClosed)
+        </dt>
+
+        <dd>
+            @if (Model.IsThemaClosed)
+            {
+                <span>Тема закрыта</span>
+            }
+            else
+            {
+                <span>Тема открыта</span>
+            }
+        </dd>
+
+        @if (Model.IsThemaClosed)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.SatisfactionScore)
+            </dt>
+
+            <dd>
+                @Model.SatisfactionScore.GetDisplayName()
+            </dd>
+        }
+
+    </dl>
+
+
+    <table class="table">
+        <tr>
+            <th>
+                От
+            </th>
+            <th>
+                Собшение
+            </th>
+            <th>
+                Дата и время
+            </th>
+        </tr>
+
+        @foreach (var item in Model.CallBackMessages)
+        {
+            <tr>
+                <td>
+                    @item.User.UserName
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Message)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateTime)
+                </td>
+            </tr>
+        }
+
+    </table>
+    <p>
+        @Html.ActionLink("Написать", "Create", routeValues: new { controller = "CallBackMessages", clientCallBackId = Model.Id })
+    </p>
+    @if (!Model.IsThemaClosed)
+    {
+        <p>
+            @Html.ActionLink("Закрыть тему", "Edit", routeValues: new { Model.Id })
+        </p>
+    }
+
+</div>
+<p>
+    @Html.ActionLink("Назад", "Index")
+</p>

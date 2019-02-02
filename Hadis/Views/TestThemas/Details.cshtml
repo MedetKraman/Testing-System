@@ -1,0 +1,107 @@
+﻿@model Hadis.Models.DBModels.TestThema
+
+@{
+    ViewBag.Title = "Подробнее";
+}
+
+<h2 class="text-center">Детали теста "@Model.Thema"</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Thema)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Thema)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActual)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActual)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalPoint)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalPoint)
+        </dd>
+
+    </dl>
+</div>
+
+<div class="">
+
+    <p>Вопросы</p>
+    @foreach (var question in Model.TestQuestions)
+    {
+        <hr />
+        <div class="row">
+            <div class="col" data-toggle="tooltip" data-placement="top" title="@question.Description">
+                @question.Question
+            </div>
+            <div class="col">
+                Вес: @question.ShareWeight
+            </div>
+            <div class="col-6">
+                <p>Ответы:</p>
+                @foreach (var answer in question.TestAnswers)
+                {
+                    <hr />
+                    <div class="row">
+                        <div class="col" data-toggle="tooltip" data-placement="top" title="@answer.Description">
+                            @answer.Answer
+                        </div>
+                        @if (answer.IsCurrect)
+                        {
+                            <div class="col">
+                                Вес: @answer.ShareWeight
+                            </div>
+                        }
+                        <div class="col">
+                            @if (answer.IsCurrect)
+                            {
+                                <p>Правильный ответ</p>
+                            }
+                            else
+                            {
+                                <p>Неправильный ответ</p>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+
+    @*
+        @{
+            Html.RenderAction("Index", routeValues: new { controller = "TestQuestions", testThemaId = Model.Id });
+        }
+    *@
+</div>
+<p>
+    @Html.ActionLink("Обновить", "Update", new { id = Model.Id }) |
+    @Html.ActionLink("Назад", "Index")
+</p>

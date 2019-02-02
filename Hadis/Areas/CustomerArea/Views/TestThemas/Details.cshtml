@@ -1,0 +1,66 @@
+﻿@model Hadis.Models.DBModels.TestThema
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TestThema</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TestThemaVersion.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TestThemaVersion.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Thema)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Thema)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActual)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActual)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalPoint)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalPoint)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

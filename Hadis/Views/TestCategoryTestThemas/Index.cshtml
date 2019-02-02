@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Hadis.Models.DBModels.TestCategoryTestThema>
+
+@{
+    ViewBag.Title = "Категория теста";
+}
+
+<h2 class="text-center">Категория теста "@ViewBag.TestThema"</h2>
+
+<p>
+    @Html.ActionLink("Добавить категорию", "Create", routeValues: new { testThemaId = (int)ViewBag.TestThemaId },
+    htmlAttributes: new { @class="btn btn-sm btn-primary" })
+    @Html.ActionLink("Тесты", "Index", routeValues: new { controller= "TestThemas" },
+    htmlAttributes: new { @class= "float-right" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TestCategory.Category)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TestCategory.Category)
+        </td>
+        <td>
+            @Html.ActionLink("Удалить", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

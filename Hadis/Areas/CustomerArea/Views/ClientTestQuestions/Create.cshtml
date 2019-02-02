@@ -1,0 +1,66 @@
+﻿@model Hadis.Models.DBModels.ClientTestQuestion
+
+@{
+    ViewBag.Title = "Вопрос";
+
+    Hadis.Models.DBModels.TestQuestion testQuestion = ViewBag.TestQuestion;
+}
+
+<h2>Тест "@testQuestion.TestThema.Thema"</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(u => u.TestQuestionId)
+    @Html.HiddenFor(u => u.ClientTestHistoryId)
+
+    <div class="form-horizontal">
+        <h4>Вопрос: @testQuestion.Question</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label for="Comment" class="control-label col-md-2">Комментарии</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Comment, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @{
+            int curAnsCnt = testQuestion.TestAnswers.Where(u => u.IsCurrect).Count();
+        }
+        <div class="form-group">
+            Количество правильных ответов <span class="font-weight-bold text-success">@curAnsCnt</span>
+            <p>Ответы:</p>
+        </div>
+
+        @if (curAnsCnt == 1)
+        {
+            foreach (var ans in testQuestion.TestAnswers)
+            {
+                <div class="form-check">
+                    <input id="rad-@(ans.Id)" class="form-check-input" type="radio" name="ClientSelectedAnswersId[0]" value="@ans.Id" />
+                    <label for="rad-@(ans.Id)" class="form-check-label">@ans.Answer</label>
+                </div>
+            }
+        }
+        @if (curAnsCnt > 1)
+        {
+            for (int i = 0; i < testQuestion.TestAnswers.Count(); i++)
+            {
+                var ans = testQuestion.TestAnswers.ElementAt(i);
+
+                <div class="form-check">
+                    @Html.CheckBox("ClientSelectedAnswersId[" + i + "]", false, htmlAttributes: new { @class = "form-check-input", value = ans.Id })
+                    <label for="@("ClientSelectedAnswersId_"+i+"_")" class="form-check-label">@ans.Answer</label>
+                </div>
+            }
+        }
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Ответит" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

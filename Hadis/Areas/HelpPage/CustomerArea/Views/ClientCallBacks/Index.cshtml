@@ -1,0 +1,60 @@
+﻿@using Hadis.Models.DBModels
+@model IEnumerable<ClientCallBack>
+
+@{
+    ViewBag.Title = "Ваши вопросы";
+}
+
+<h2 class="text-center">Ваши вопросы</h2>
+
+<p>
+    @Html.ActionLink("Задать вопрос", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Thema)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsThemaClosed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SatisfactionScore)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Thema)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateTime)
+        </td>
+        <td>
+            @if (item.IsThemaClosed)
+            {
+                <span>Тема закрыта</span>
+            }
+            else
+            {
+                <span>Тема открыта</span>
+            }
+        </td>
+        <td>
+            @if (item.IsThemaClosed)
+            {
+                @item.SatisfactionScore.GetDisplayName()
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Открыть", "Details", new { id = item.Id })
+        </td>
+    </tr>
+}
+
+</table>

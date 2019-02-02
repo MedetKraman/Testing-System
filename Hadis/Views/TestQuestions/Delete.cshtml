@@ -1,0 +1,55 @@
+﻿@model Hadis.Models.DBModels.TestQuestion
+
+@{
+    ViewBag.Title = "Удалить вопрос";
+}
+
+<h2>Удалить вопрос "@Model.Question"</h2>
+
+<h3>Вы уверены, что хотите удалить это?</h3>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TestThema.Thema)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TestThema.Thema)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Question)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Question)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShareWeight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShareWeight)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Назад", "Update", routeValues: new { controller = "TestThemas", id = Model.TestThemaId })
+        </div>
+    }
+</div>

@@ -1,0 +1,38 @@
+﻿@model Hadis.Models.DBModels.TestCategoryTestThema
+
+@{
+    ViewBag.Title = "Удалить категорию";
+}
+
+<h2 class="text-center">Удалить из теста "@ViewBag.TestThema" категорию "@ViewBag.Category"</h2>
+
+<h3>Вы уверены, что хотите удалить?</h3>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TestCategory.Category)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TestCategory.Category)
+        </dd>
+
+        <dt>
+            Тест
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TestThema.Thema)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Назад", "Index", routeValues: new { testThemaId = Model.TestThemaId })
+        </div>
+    }
+</div>

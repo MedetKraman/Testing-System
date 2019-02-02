@@ -1,0 +1,72 @@
+﻿@model Hadis.Models.DBModels.TestThema
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>TestThema</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TestThemaVersion.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TestThemaVersion.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Thema)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Thema)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActual)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActual)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalPoint)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalPoint)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

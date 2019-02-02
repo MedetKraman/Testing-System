@@ -1,0 +1,30 @@
+﻿@model Hadis.Models.DBModels.TestCategory
+
+@{
+    ViewBag.Title = "Удалить";
+}
+
+<h2 class="text-center">Удалить категорию "@Model.Category"</h2>
+
+<h3>Вы уверены, что хотите удалить?</h3>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Назад", "Index", routeValues: new { }, htmlAttributes: new { @class="" })
+        </div>
+    }
+</div>

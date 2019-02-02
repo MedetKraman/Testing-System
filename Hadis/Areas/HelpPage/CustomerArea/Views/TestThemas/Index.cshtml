@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Hadis.Models.DBModels.TestThema>
+
+@{
+    ViewBag.Title = "Тесты";
+}
+
+<h2 class="text-center">Тесты</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Thema)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalPoint)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Thema)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalPoint)
+        </td>
+        <td>
+            @Html.ActionLink("Пройти тестирование", "Create", new { id=item.Id, controller = "ClientTestHistories" }) 
+        </td>
+    </tr>
+}
+
+</table>

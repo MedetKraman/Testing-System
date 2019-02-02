@@ -1,0 +1,16 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ActionLink("Здравствуйте, " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: new { area = "" }, htmlAttributes: new { @class = "text-white", title = "Manage" })
+        <a class="text-white" href="javascript:sessionStorage.removeItem('accessToken');$('#logoutForm').submit();">Выйти</a>
+    }
+}
+else
+{
+    @Html.ActionLink("Зарегистрироваться", "Register", "Account", routeValues: new { area = "" }, htmlAttributes: new { @class= "text-white", id = "registerLink" })
+    @Html.ActionLink("Выполнить вход", "Login", "Account", routeValues: new { area = "" }, htmlAttributes: new { @class = "pl-2 text-white", id = "loginLink" })
+}

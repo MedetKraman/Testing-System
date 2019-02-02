@@ -1,0 +1,107 @@
+﻿@model Hadis.Models.DBModels.ClientTestHistory
+
+@{
+    ViewBag.Title = "История тестирование";
+}
+
+<h2 class="text-center">Результат тестирование "@Model.TestThema.Thema"</h2>
+
+<div>
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Point)
+        </dt>
+
+        <dd>
+            @((int)Model.Point)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalPoint)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalPoint)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comment)
+        </dd>
+
+    </dl>
+
+    @* Questions *@
+    <table class="table">
+        <tr>
+            <th>
+                Комментарии
+            </th>
+            <th>
+                Вопрос
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.ClientTestQuestions)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comment)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TestQuestion.Question)
+                </td>
+                <td>
+                    @* Ответы *@
+                    <table class="table">
+                        <tr>
+                            <th>
+                                Ответ
+                            </th>
+                            <th>
+                            </th>
+                        </tr>
+
+                        @foreach (var selAns in item.ClientSelectedAnswers)
+                        {
+                            <tr>
+                                <td>
+                                    @selAns.TestAnswer.Answer
+                                </td>
+                                <td>
+                                    @if (selAns.TestAnswer.IsCurrect)
+                                    {
+                                        <span class="text-success">Правильный ответ</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-danger">Неправильный ответ</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+<p>
+<p>
+    @Html.ActionLink("Назад", "Index")
+</p>

@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewBag.Title = "APITest";
+}
+
+<h2>APITest</h2>
+
+
+<div class="registerForm" style="display: block;">
+    <label>Введиту Username</label>
+    <input type="text" name="username" id="username" value="" />
+    <label>Введиту Email</label>
+    <input type="email" name="email" id="email" value="" />
+    <label>Введите пароль</label>
+    <input type="password" name="password" id="password" value="" />
+    <label>Подтвердите пароль</label>
+    <input type="password" name="confirmPassword" id="confirmPassword" value="" />
+
+    <label>Введиту имя</label>
+    <input type="text" name="name" id="name" value="" />
+    <label>Введиту фамилию</label>
+    <input type="text" name="surname" id="surname" value="" />
+    <label>Введиту отчество</label>
+    <input type="text" name="fatherName" id="fatherName" value="" />
+    <label>Введиту ИИН</label>
+    <input type="text" name="iin" id="iin" value="" />
+
+    <label>Введиту стаж</label>
+    <input type="number" name="ageExp" id="ageExp" value="" />
+    <label>Введиту тип машины</label>
+    <input type="number" name="typeVech" id="typeVech" value="" />
+    <input type="submit" name="submit" id="submit" value="Регистрация" />
+</div>
+<div class="userInfo" style="display: none;">
+    <p>
+        Вы вошли как
+        <span class="userName"></span>
+    </p>
+    <input type="button" value="Выйти" id="logOut" />
+</div>
+<div class="loginForm">
+    <h3>Вход на сайт</h3>
+    <label>Введите Email</label>
+    <br />
+    <input type="email" value="" id="emailLogin" />
+    <br /> <br />
+    <label>Введите пароль</label>
+    <br />
+    <input type="password" value="" id="passwordLogin" />
+    <br /><br />
+    <input type="submit" id="submitLogin" value="Догин" />
+</div>
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            $("#submit").click(function (e) {
+                e.preventDefault();
+                var data = {
+                    Username: $("#username").val(),
+                    Email: $("#email").val(),
+                    Password: $("#password").val(),
+                    ConfirmPassword: $('#confirmPassword').val(),
+                    name: $("#name").val(),
+                    surName: $("#surname").val(),
+                    fatherName: $("#fatherName").val(),
+                    iin: $("#iin").val(),
+                    ageAndExperience: $("#ageExp").val(),
+                    typesVehicle: $("#typeVech").val(),
+                };
+
+                console.log(data);
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/api/Account/Register',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify(data)
+                }).success(function (data) {
+                    alert("Регистрация пройдена");
+                }).fail(function (data) {
+                    alert("В процессе регистраци произошла ошибка");
+                });
+            });
+
+            var tokenKey = "tokenInfo";
+            $("#submitLogin").click(function (e) {
+                e.preventDefault();
+                var loginData = {
+                    grant_type: 'password',
+                    username: $('#emailLogin').val(),
+                    password: $('#passwordLogin').val()
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/Token',
+                    data: loginData,
+                    success: function (data) {
+                        $('.userName').text(data.username);
+                        $('.userInfo').css('display', 'block');
+                        $('.loginForm').css('display', 'none');
+
+                        sessionStorage.setItem(tokenKey, data.access_token);
+                        console.log("access token: " + data.access_token);
+                        console.log("user name: " + data.username);
+                    },
+                    error: function (data) {
+                        alert("Ошибка при логине");
+                    }
+                });
+            });
+        });
+    </script>
+}

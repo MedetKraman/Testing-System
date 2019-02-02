@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Добро пожаловать";
+}
+
+<div class="jumbotron">
+    <h1>Центр тестирование</h1>
+    <p class="lead">Здесь будет текст</p>
+    <p>
+        @Html.ActionLink("Тесты", "Index", routeValues: new { controller = "TestThemas" },
+      htmlAttributes: new { @class="btn btn-primary" })
+        @Html.ActionLink("История", "Index", routeValues: new { controller = "ClientTestHistories" },
+      htmlAttributes: new { @class= "btn btn-primary" })
+        @Html.ActionLink("Сообщения", "Index", routeValues: new { controller = "ClientCallBacks" },
+      htmlAttributes: new { @class= "btn btn-primary" })
+    </p>
+</div>
+
+
+@section Scripts{
+}
+
