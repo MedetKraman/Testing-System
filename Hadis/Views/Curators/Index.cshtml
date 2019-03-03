@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Hadis.Models.DBModels.Curator>
+
+@{
+    ViewBag.Title = "Кураторы";
+
+    string viewMessage = ViewBag.ViewMessage;
+}
+
+<h2 class="text-center">Index</h2>
+
+@if(!String.IsNullOrWhiteSpace(viewMessage))
+{
+    <h5 class="text-warning text-center">@viewMessage</h5>
+}
+
+<p>
+    @Html.ActionLink("Добавить нового куратора", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Аватар
+        </th>
+        <th>
+            ФИО
+        </th>
+        <th>
+            Эл. почта
+        </th>
+        <th>
+            описание
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <div style="width: 150px; height: 200px;">
+                <img class="img-fluid" src="@(Url.Content(item.AvatarUrl))" />
+            </div>
+        </td>
+        <td style="vertical-align: middle;">
+            @(item.Lastname + " " + item.Firstname + " " + item.Fathername)
+        </td>
+        <td style="vertical-align: middle;">
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td style="vertical-align: middle;">
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td style="vertical-align: middle;">
+            @Html.ActionLink("Редактировать", "Edit", new { id = item.Id })
+            @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+        </td>
+    </tr>
+}
+
+</table>

@@ -249,6 +249,7 @@
     <Compile Include="Controllers\ChatUsersController.cs" />
     <Compile Include="Controllers\ClientCallBacksController.cs" />
     <Compile Include="Controllers\ClientTestHistoriesController.cs" />
+    <Compile Include="Controllers\CuratorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MeController.cs" />
@@ -282,6 +283,10 @@
     <Compile Include="Migrations\201901261143330_C_Video.Designer.cs">
       <DependentUpon>201901261143330_C_Video.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902171222478_C_Curator.cs" />
+    <Compile Include="Migrations\201902171222478_C_Curator.Designer.cs">
+      <DependentUpon>201902171222478_C_Curator.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ChatModels.cs" />
@@ -314,6 +319,7 @@
     <Content Include="Images\data-base-bg.jpg" />
     <Content Include="Images\ic_videos.png" />
     <Content Include="Images\result-bg.jpg" />
+    <Content Include="Images\teacher-bg.jpg" />
     <Content Include="Scripts\app\_run.js" />
     <Content Include="Scripts\app\app.datamodel.js" />
     <Content Include="Scripts\app\app.viewmodel.js" />
@@ -500,6 +506,11 @@
     <Content Include="Views\Videos\Details.cshtml" />
     <Content Include="Views\Videos\Edit.cshtml" />
     <Content Include="Views\Videos\Index.cshtml" />
+    <Content Include="Views\Curators\Create.cshtml" />
+    <Content Include="Views\Curators\Delete.cshtml" />
+    <Content Include="Views\Curators\Details.cshtml" />
+    <Content Include="Views\Curators\Edit.cshtml" />
+    <Content Include="Views\Curators\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -527,6 +538,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901261143330_C_Video.resx">
       <DependentUpon>201901261143330_C_Video.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902171222478_C_Curator.resx">
+      <DependentUpon>201902171222478_C_Curator.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

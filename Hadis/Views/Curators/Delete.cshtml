@@ -1,0 +1,24 @@
+﻿@model Hadis.Models.DBModels.Curator
+
+@{
+    string fio = $"{Model.Lastname} {Model.Firstname} {Model.Fathername}";
+    string title = $"Удалить анкету куратора: {fio}";
+    ViewBag.Title = title;
+}
+
+<h2>@title</h2>
+
+<h3>Вы уверены?</h3>
+<div>
+    <h4>@fio</h4>
+    <hr />
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Назад", "Index")
+        </div>
+    }
+</div>

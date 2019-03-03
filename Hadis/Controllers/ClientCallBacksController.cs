@@ -16,10 +16,20 @@ namespace Hadis.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: ClientCallBacks
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(bool? isThemesClosed = null, DateTime? date = null)
         {
-            var clientCallBacks = db.ClientCallBacks.Include(c => c.Client.User);
-            return View(await clientCallBacks.ToListAsync());
+            var query = db.ClientCallBacks.Include(c => c.Client.User);
+            if (isThemesClosed != null) query = query.Where(u => u.IsThemaClosed == isThemesClosed.Value);
+            if (date != null)
+            {
+                DateTime from = new DateTime(date.Value.Year, date.Value.Month, date.Value.Day);
+                DateTime to = from.AddDays(1);
+                query = query.Where(u => from <= u.DateTime && u.DateTime <= to);
+            }
+
+            ViewBag.IsThemesClosed = isThemesClosed;
+            ViewBag.Date = date;
+            return View(await query.ToListAsync());
         }
 
         // GET: ClientCallBacks/Details/5

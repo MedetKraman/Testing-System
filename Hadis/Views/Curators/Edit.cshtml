@@ -1,0 +1,93 @@
+﻿@model Hadis.Models.DBModels.Curator
+
+@{
+    ViewBag.Title = "Редактировать куратора";
+}
+
+<h2 class="text-center">Редактировать куратора: @(Model.Lastname + " " + Model.Firstname + " " + Model.Fathername)</h2>
+
+@using (Html.BeginForm("Edit", "Curators", FormMethod.Post, htmlAttributes: new { encrypt = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>@(Model.Lastname + " " + Model.Firstname + " " + Model.Fathername)</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.AvatarUrl)
+
+        <div class="form-group">
+            Фамилия
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Lastname, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Lastname, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Имя
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Firstname, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Firstname, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Отчество
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Fathername, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Fathername, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Эл. почта
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            Описание
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <input name="file" type="file" />
+
+        <div class="form-group">
+            Аватар
+            <label class="control-label col-md-2" for="avatar-file">
+                <div style="width: 150px; height: 200px;"><img id="avatar-container" src="@(Url.Content(Model.AvatarUrl))" class="img-fluid" /></div>
+            </label>
+            <div id="avatar" class="col-md-10">
+                <input hidden type="file" name="avatarFile" id="avatar-file" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Сохранить изменение" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Назад", "Index")
+</div>
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#avatar-file').change(function (e) {
+                avatarFile = this.files[0];
+                $('#avatar-container').attr('src', URL.createObjectURL(avatarFile));
+            });
+        });
+    </script>
+}

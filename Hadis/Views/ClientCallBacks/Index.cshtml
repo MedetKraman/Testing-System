@@ -3,10 +3,33 @@
 
 @{
     ViewBag.Title = "Вопросы пользователей";
+
+    bool? isThemesClosed = ViewBag.IsThemesClosed;
+    DateTime? date = ViewBag.Date;
 }
 
 <h2 class="text-center">Вопросы пользователей</h2>
 
+<div class="form-inline justify-content-center align-items-end">
+    <div class="form-group w-25 p-1">
+        <p class="text-right w-100 h6">Фильтр:</p>
+    </div>
+    <div class="form-group w-25 p-1">
+        <label for="specialty" class="text-center w-100">Статус</label>
+        <select id="oc-status" class="form-control w-100" name="isThemesClosed">
+            <option value=""></option>
+            <option value="true" @(isThemesClosed != null && isThemesClosed.Value ? "selected" : "")>Закрытые</option>
+            <option value="false" @(isThemesClosed != null && !isThemesClosed.Value ? "selected" : "")>Открытые</option>
+        </select>
+    </div>
+    <div class="form-group w-25 p-1">
+        <label for="teacher" class="text-center w-100">Дата</label>
+        <input id="data" class="form-control w-100" name="date" type="date" value="@(date?.ToString("yyyy-MM-dd")??"")" />
+    </div>
+    <div class="form-group w-25 p-1 align-items-end">
+        <button id="btn-clear-filter" type="button" class="btn btn-sm btn-primary text-white" style="font-size:13px;margin-bottom:2px;">Очистить</button>
+    </div>
+</div>
 <table class="table">
     <tr>
         <th>
@@ -62,3 +85,22 @@
     }
 
 </table>
+
+@section Scripts {
+    <script>
+        $(function () {
+            $('#oc-status').change(function (e) {
+
+                location.href = location.href.split('?')[0] + "?isThemesClosed=" + $(this).prop('value') + "&date=" + $('#data').prop('value');
+            });
+            $('#data').change(function (e) {
+
+                location.href = location.href.split('?')[0] + "?date=" + $(this).prop('value') + "&isThemesClosed=" + $('#oc-status').prop('value');
+            });
+            $('#btn-clear-filter').click(function (e) {
+
+                location.href = location.href.split('?')[0];
+            });
+        })
+    </script>
+}

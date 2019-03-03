@@ -46,6 +46,8 @@ namespace Hadis.Models.DBModels
         public DbSet<ClientCallBack> ClientCallBacks { get; set; }
         public DbSet<CallBackMessage> CallBackMessages { get; set; }
 
+        public DbSet<Curator> Curators { get; set; }
+
 
         /* Chat */
         public DbSet<ChatUser> ChatUsers { get; set; }
@@ -353,6 +355,23 @@ namespace Hadis.Models.DBModels
         [Required]
         public int ClientCallBackId { get; set; }
         public virtual ClientCallBack ClientCallBack { get; set; }
+    }
+
+    public class Curator
+    {
+        public int Id { get; set; }
+        [Required]
+        public string Lastname { get; set; }
+        [Required]
+        public string Firstname { get; set; }
+        public string Fathername { get; set; }
+        [Required]
+        [Index(IsUnique = true)]
+        [MinLength(6)]
+        [MaxLength(128)]
+        public string Email { get; set; }
+        public string Description { get; set; }
+        public string AvatarUrl { get; set; }
     }
 
     public static class EnumHelperCustom
